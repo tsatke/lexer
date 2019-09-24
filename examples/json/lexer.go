@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/TimSatke/parser/lexer"
+	"github.com/TimSatke/lexer"
 )
 
 // Character classes
@@ -67,19 +67,19 @@ func lexToken(l lexer.Lexer) lexer.State {
 func lexNumber(l lexer.Lexer) lexer.State {
 	l.Accept(CCSignNeg) // optional
 
-	if !l.AcceptMultiple(CCNumber) {
+	if l.AcceptMultiple(CCNumber) == 0 {
 		return tokenMismatch(l, CCNumber)
 	}
 
 	if l.Accept(CCFraction) {
-		if !l.AcceptMultiple(CCNumber) {
+		if l.AcceptMultiple(CCNumber) == 0 {
 			return tokenMismatch(l, CCNumber)
 		}
 	}
 
 	if l.Accept(CCExponent) {
 		l.Accept(CCSign)
-		if !l.AcceptMultiple(CCNumber) {
+		if l.AcceptMultiple(CCNumber) == 0 {
 			return tokenMismatch(l, CCNumber)
 		}
 	}

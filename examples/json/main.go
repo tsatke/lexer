@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/TimSatke/parser/lexer"
+	"github.com/TimSatke/lexer"
 )
 
 const data = `
